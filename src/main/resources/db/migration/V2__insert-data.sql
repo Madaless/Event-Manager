@@ -1,0 +1,1 @@
+INSERT INTO event VALUES(1,'Bialystok','1977-01-01 00:00:01','OPIS','19:00', 'EVENCIK', '01.02.2019');
