@@ -14,7 +14,7 @@ public class TodoService{
 
 
   public TodoItem update(long todoItemId, TodoItem todoItem) {
-    return null;
+    return todoItemRepository.save(todoItem);
   }
 
 

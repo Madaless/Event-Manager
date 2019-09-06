@@ -12,8 +12,8 @@ public class EventService {
   @Autowired
   EventRepository eventRepository;
 
-  public Event update(long todoItemId, Event todoItem) {
-    return null;
+  public Event update(long todoItemId, Event event) {
+    return eventRepository.save(event);
   }
 
   public List<Event> findAll() {
@@ -31,6 +31,8 @@ public class EventService {
   public Event getEvent(Long id) {
     return eventRepository.getOne(id);
   }
+
+
 
 }
 

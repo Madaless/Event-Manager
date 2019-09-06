@@ -1,4 +1,4 @@
-create table event
+create table if not exists event
 (
     id bigint not null
         constraint event_pkey
@@ -13,42 +13,38 @@ create table event
 
 alter table event owner to postgres;
 
-create table to_do_adicional
-(
-    id bigint not null
-        constraint to_do_adicional_pkey
-            primary key,
-    name varchar(255),
-    to_do_adicional_id bigint
-        constraint fktocoabs8wudntqreext7d3gp9
-            references event
-);
-
-alter table to_do_adicional owner to postgres;
-
-create table to_do_default
-(
-    id bigint not null
-        constraint to_do_default_pkey
-            primary key,
-    name varchar(255),
-    to_do_default_id bigint
-        constraint fkiwpaxm5um3b8rt9gi6b8ty2tl
-            references event
-);
-
-alter table to_do_default owner to postgres;
-
-create table todo_item
+create table if not exists todo_item
 (
     id bigint not null
         constraint todo_item_pkey
             primary key,
     content varchar(255),
+    is_done boolean,
+    type varchar(255),
     to_do_item_id bigint
-        constraint fklyt7oob32k83roxk6n821tsga
-            references to_do_adicional
+        constraint fkr7u1tjrvqnmb25hgeggovoh76
+            references event
 );
 
 alter table todo_item owner to postgres;
+
+create table if not exists todo_item_pre
+(
+    id bigint not null
+        constraint todo_item_pre_pkey
+            primary key,
+    content varchar(255)
+);
+
+alter table todo_item_pre owner to postgres;
+
+create table if not exists to_do_predef_list
+(
+    id bigint not null
+        constraint to_do_predef_list_pkey
+            primary key,
+    name varchar(255)
+);
+
+alter table to_do_predef_list owner to postgres;
 

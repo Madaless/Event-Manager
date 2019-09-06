@@ -3,22 +3,28 @@ package com.madaless.EventManager.controllers;
 import com.madaless.EventManager.entities.Event;
 import com.madaless.EventManager.services.EventService;
 import java.util.List;
+import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
+@RequestMapping("/events")
 public class EventController {
 
   @Autowired
   EventService eventService;
 
-  @RequestMapping("/events")
+  @RequestMapping("/all")
   public ModelAndView Eventlist(){
     ModelAndView mv = new ModelAndView("index");
     List<Event> events = eventService.findAll();
@@ -26,9 +32,51 @@ public class EventController {
     return mv;
   }
 
-  @GetMapping("/eventdelete/{id}")
+  @RequestMapping("/new")
+  public String createEvent(Event event){
+    return "add-event";
+  }
+
+  @PostMapping("/add")
+  public String addEvent(@Valid Event event, BindingResult result, Model model) {
+    if (result.hasErrors()) {
+      return "add-event";
+    }
+
+    eventService.save(event);
+    return "redirect:all";
+  }
+
+  @GetMapping("/delete/{id}")
   public String deleteEvent(@PathVariable("id") long id) {
     eventService.delete(id);
-    return "redirect:/events";
+    return "redirect:/events/";
   }
+
+//  @RequestMapping(path = {"/edit", "/edit/{id}"})
+//  public String editEvent(Model model, @PathVariable("id") Optional<Long> id)
+//  {
+//
+//
+//  }
+
+  @RequestMapping("/edit/{id}")
+  public ModelAndView editEvent(@PathVariable("id") long id) {
+    ModelAndView mav = new ModelAndView("add_edit_event");
+    Event event = eventService.getEvent(id);
+    mav.addObject("event", event);
+    return mav;
+  }
+
+  @PostMapping("/update/{id}")
+  public String updateEvent(@PathVariable("id") long id, Model model, @Valid Event event, BindingResult result) {
+    if(result.hasErrors()){
+      event.setId(id);
+      return "add_edit_event";
+    }
+    eventService.update(id,event);
+    model.addAttribute("events", eventService.findAll());
+    return "index";
+  }
+
 }
