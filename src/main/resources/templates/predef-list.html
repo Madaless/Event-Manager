@@ -41,38 +41,18 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>Location</th>
-    <th>Date</th>
-    <th>Hour</th>
-    <th>Delete</th>
-    <th>Update</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="event : ${events}">
+  <tr th:each="predefList : ${predefLists}">
     <article class="media content-section">
       <div class="media-body">
         <div class="article-metadata">
-            <!--  <td><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text = "${evento.nome}"></span></a></td>-->
-            <td><span th:text="${event.name}"></span></a></td>
-            </td>
-            <td><span th:text="${event.location}"></span></td>
-            <td><span th:text="${event.stringDate}"></span></td>
-            <td><span th:text="${event.hour}"></span></td>
-          <td>
-            <a th:href="@{/events/delete/{id}(id=${event.id})}"
-               class="btn btn-primary">
-              <i class="fas fa-user-times ml-2"></i>
-            </a>
-          </td>
-          <td>
-            <a th:href="@{/events/edit/{id}(id=${event.id})}"
-               class="btn btn-primary">
-              <i class="fas fa-user-times ml-2"></i>
-            </a>
-          </td>
+          <!--  <td><a th:href="${(#mvc.url('EC#detalhesEvento').arg(0, evento.codigo)).build()}"><span th:text = "${evento.nome}"></span></a></td>-->
+          <td><span th:text="${predefList.name}"></span></a></td>
 
-            <!--  <td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.codigo)).build()}"><i class="material-icons center">delete</i></a></td>-->
+
+          <!--  <td><a class="waves-effect waves-light btn-small" th:href="${(#mvc.url('EC#deletarEvento').arg(0, evento.codigo)).build()}"><i class="material-icons center">delete</i></a></td>-->
         </div>
       </div>
     </article>

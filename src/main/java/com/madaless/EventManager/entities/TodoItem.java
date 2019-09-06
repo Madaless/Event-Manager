@@ -12,7 +12,7 @@ public class TodoItem {
   private long id;
   private String content;
   private Boolean is_done;
-  private String type;
+  private Boolean is_predef;
 
   public TodoItem() {
   }
@@ -35,5 +35,21 @@ public class TodoItem {
 
   public void setContent(String content) {
     this.content = content;
+  }
+
+  public Boolean getIs_done() {
+    return is_done;
+  }
+
+  public void setIs_done(Boolean is_done) {
+    this.is_done = is_done;
+  }
+
+  public Boolean getIs_predef() {
+    return is_predef;
+  }
+
+  public void setIs_predef(Boolean is_predef) {
+    this.is_predef = is_predef;
   }
 }

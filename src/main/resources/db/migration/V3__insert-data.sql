@@ -1,2 +1,4 @@
-INSERT INTO event VALUES(2,'Wroclaw','1978-08-02 00:00:01','OPIS','20:00', 'Konferencja', '01.02.2020');
-INSERT INTO event VALUES(3,'Warszawa','1978-08-02 00:00:01','OPIS','21:00', 'Meetup', '01.02.2020');
+INSERT INTO todo_item VALUES(1,'kupic placki',false, false, 1);
+INSERT INTO todo_item VALUES(2,'kupic pizze',false, true, 2);
+INSERT INTO todo_item VALUES(3,'kupic cole',false, false, 2);
+INSERT INTO todo_item VALUES(4,'kupic chipsy',false, true, 1);

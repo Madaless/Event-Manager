@@ -34,6 +34,14 @@
             <div class="form-group col-md-8">
               <label for="description" class="col-form-label">desription</label> <input type="text" th:field="*{description}" class="form-control" id="description" placeholder="describe your event.."> <span th:if="${#fields.hasErrors('location')}" th:errors="*{description}" class="text-danger"></span>
             </div>
+<!--            <select th:field="*{todoPredefList}" multiple>-->
+<!--              <option th:each="predefined : ${todoPredefList}" th:value="${predefined.id}"-->
+<!--                      th:text="${predefined.name}"></option>-->
+<!--            </select>-->
+
+
+
+
 
             <div class="col-md-6">
               <input type="submit" class="btn btn-primary" value="Add Event">

@@ -2,6 +2,7 @@ package com.madaless.EventManager.controllers;
 
 import com.madaless.EventManager.entities.Event;
 import com.madaless.EventManager.services.EventService;
+import com.madaless.EventManager.services.TodoPredefListService;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -23,6 +24,8 @@ public class EventController {
 
   @Autowired
   EventService eventService;
+  @Autowired
+  TodoPredefListService todoPredefListService;
 
   @RequestMapping("/all")
   public ModelAndView Eventlist(){
@@ -33,7 +36,9 @@ public class EventController {
   }
 
   @RequestMapping("/new")
-  public String createEvent(Event event){
+  public String createEvent(Model model, Event event){
+    model.addAttribute("todoPredefList", todoPredefListService.findAll());
+    model.addAttribute("event", event);
     return "add-event";
   }
 
@@ -42,7 +47,7 @@ public class EventController {
     if (result.hasErrors()) {
       return "add-event";
     }
-
+    //model.addAttribute("predef", todoPredefListService.findAll() );
     eventService.save(event);
     return "redirect:all";
   }
@@ -50,7 +55,7 @@ public class EventController {
   @GetMapping("/delete/{id}")
   public String deleteEvent(@PathVariable("id") long id) {
     eventService.delete(id);
-    return "redirect:/events/";
+    return "redirect:/events/all";
   }
 
 //  @RequestMapping(path = {"/edit", "/edit/{id}"})

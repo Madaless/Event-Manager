@@ -4,14 +4,17 @@ import java.util.Date;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Event {
+
+
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.TABLE)
   private long id;
   private String name;
   private String Location;
@@ -21,7 +24,7 @@ public class Event {
   private String description;
 
   @OneToMany
-  @JoinColumn(name = "to_do_item_id")
+  @JoinColumn(name = "todo_item_id")
   private Set<TodoItem> todoItem;
 
   public Event(String name, String location, Date creationDate, String stringDate,
